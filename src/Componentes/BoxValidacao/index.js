@@ -23,6 +23,7 @@ const BoxPontuacao = styled.div`
     align-items: center;
     height: 50px;
     margin-bottom: 15px;
+    width: 100%;
 
     @media screen and (min-width: 721px){
         grid-template-columns: ${props => props.grids || '1fr 1fr 1fr'};;
