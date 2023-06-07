@@ -5,7 +5,7 @@ export const Input = styled.input`
     color: #FFF;
 
     width: 234px;
-    padding: 10px 45px;
+    padding: 10px 25px;
     margin-bottom: 25px;
     text-align: center;
 
@@ -16,5 +16,8 @@ export const Input = styled.input`
     &::placeholder {
         color: #FFF;
         font: 16px;
+    }
+    @media screen and (min-width: 721px){
+    padding: 10px 45px;
     }
 `
