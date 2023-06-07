@@ -12,8 +12,8 @@ const AppContainer = styled.div`
   color: white;
   background-image: linear-gradient(90deg, #002F52 35%, #326589 165%);
   border-radius: 25px;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: auto;
 `
 
 export const App = () => {

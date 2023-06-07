@@ -11,6 +11,7 @@ export const BoxStatus = ({ vidas, pontos }) => {
         width: 110px;
 
         border: 2px solid #FFF;
+        border-radius: 50px;
     `
     const BoxStatusItens = styled.li`
     `

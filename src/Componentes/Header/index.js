@@ -6,6 +6,7 @@ const HeaderContainer = styled.header`
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: auto;
   margin: 30px 0;
 `
 

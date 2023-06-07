@@ -6,6 +6,7 @@ import { BancoDeDados } from "../BancoDeDados";
 import { BoxValidacao } from "../BoxValidacao";
 
 const BodyContainer = styled.div`
+    flex-direction: column;
     align-items: center;
     height: auto;
 `

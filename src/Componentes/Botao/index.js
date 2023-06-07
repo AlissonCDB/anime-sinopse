@@ -6,8 +6,8 @@ color: #000;
 font-size: 16px;
 text-align: center;
 
-width: ${props => props.largura || '155px'};
-padding: ${props => props.padding || '10px 0'};
+width: ${props => props.largura || '154px'};
+padding: ${props => props.padding || '12px 0'};
 margin-bottom: ${props => props.marginbottom || '20px'};
 
 border: 2px solid #FFF;
