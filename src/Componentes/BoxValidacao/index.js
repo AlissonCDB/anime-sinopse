@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Botao } from "../Botao";
 import { ImagensContainer, Logo } from "../Imagens";
 import { BancoDeDados } from '../BancoDeDados'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Textos } from '../Textos';
 import { Pergunta } from '../Pergunta';
 import { Input } from '../Input';
@@ -37,6 +37,23 @@ export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, s
     const [texto, setTexto] = useState('');
     const opcoes = Object.values(BancoDeDados).map((nomes) => nomes.nome);
     const opcoesImg = Object.values(BancoDeDados).map((nomes) => nomes.imagem);
+    const [autoFocus, setAutoFocus] = useState(true);
+
+    useEffect(() => {
+    const alterarAutoFocus = () =>{
+        const tamanhoTela = window.innerWidth;
+        if(tamanhoTela < 721) {
+            setAutoFocus(false);
+        } else {
+            setAutoFocus(true);
+        }
+    }
+    window.addEventListener('resize', alterarAutoFocus);
+    alterarAutoFocus();
+    return () => {
+        window.removeEventListener('resize', alterarAutoFocus);
+      };
+    }, []);
 
 
     const ok = () => {
@@ -66,7 +83,7 @@ export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, s
                 placeholder='Escreva o nome o Anime!'
                 autoComplete='off'
                 list={'opcoes'}
-                autoFocus='on'
+                autoFocus={autoFocus}
                 value={inputValue}
                 onChange={e => setInputValue(e.target.value)}
             />}
