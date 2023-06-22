@@ -71,7 +71,7 @@ export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, s
     }, []);
 
     const ok = () => {
-        if (inputValue.toLowerCase() === opcoes[numeroSecreto].toLowerCase()) {
+        if (inputValue.toLowerCase().includes(opcoes[numeroSecreto].toLowerCase())) {
             setInputValue('');
             setImagem(listaImagens[numeroSecreto]);
             setTexto('Você acertou a resposta é ' + opcoes[numeroSecreto]);
@@ -88,6 +88,7 @@ export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, s
             return false;
         }
     }
+
     return (
         <BoxValidacaoContainer>
             {!valor && <Input
