@@ -1,20 +1,20 @@
 import styled from "styled-components"
 
+const BoxStatusContainer = styled.ul`
+display: flex;
+flex-direction: column;
+justify-content: start;
+align-items: center;
+padding: 0 20px;
+width: 110px;
+
+border: 2px solid #FFF;
+border-radius: 50px;
+`
+const BoxStatusItens = styled.li`
+`
+
 export const BoxStatus = ({ vidas, pontos }) => {
-
-    const BoxStatusContainer = styled.ul`
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-        padding: 0 20px;
-        width: 110px;
-
-        border: 2px solid #FFF;
-        border-radius: 50px;
-    `
-    const BoxStatusItens = styled.li`
-    `
 
     return (
         <BoxStatusContainer>

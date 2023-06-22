@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-import { Botao } from "../Botao";
-import { ImagensContainer, Logo } from "../Imagens";
-import { BancoDeDados } from '../BancoDeDados'
+import { Botao } from "../ObjetosReutilizaveis/Botao";
+import { ImagensContainer, Logo } from "../../Imagens";
 import React, { useState, useEffect } from 'react';
-import { Textos } from '../Textos';
+import { Textos } from '../ObjetosReutilizaveis/Textos';
 import { Pergunta } from '../Pergunta';
-import { Input } from '../Input';
+import { Input } from '../ObjetosReutilizaveis/Input';
 import { BoxStatus } from '../BoxStatus';
-
+import { getAnimes } from '../../Servicos/animes';
 
 
 const BoxValidacaoContainer = styled.div`
@@ -33,47 +32,60 @@ const BoxPontuacao = styled.div`
 export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, setVidas, vidas, pontos }) => {
 
     const [inputValue, setInputValue] = useState('');
+    const [listaImagens, setListaImagens] = useState([])
     const [imagem, setImagem] = useState('');
     const [texto, setTexto] = useState('');
-    const opcoes = Object.values(BancoDeDados).map((nomes) => nomes.nome);
-    const opcoesImg = Object.values(BancoDeDados).map((nomes) => nomes.imagem);
+    const [opcoes, setOpcoes] = useState([])
     const [autoFocus, setAutoFocus] = useState(true);
 
     useEffect(() => {
-    const alterarAutoFocus = () =>{
-        const tamanhoTela = window.innerWidth;
-        if(tamanhoTela < 721) {
-            setAutoFocus(false);
-        } else {
-            setAutoFocus(true);
-        }
-    }
-    window.addEventListener('resize', alterarAutoFocus);
-    alterarAutoFocus();
-    return () => {
-        window.removeEventListener('resize', alterarAutoFocus);
-      };
+        const fetchAnimes = async () =>{
+            try{
+                const animes = await getAnimes();
+                const opcao = animes.map((anime) => anime.nome);
+                const listaImagens = animes.map((anime) => anime.imagem);
+                setOpcoes(opcao);
+                setListaImagens(listaImagens);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchAnimes();
     }, []);
 
+    useEffect(() => {
+        const alterarAutoFocus = () => {
+            const tamanhoTela = window.innerWidth;
+            if (tamanhoTela < 721) {
+                setAutoFocus(false);
+            } else {
+                setAutoFocus(true);
+            }
+        }
+        window.addEventListener('resize', alterarAutoFocus);
+        alterarAutoFocus();
+        return () => {
+            window.removeEventListener('resize', alterarAutoFocus);
+        };
+    }, []);
 
     const ok = () => {
-        if (inputValue === opcoes[numeroSecreto]) {
-            return console.log('Correto'),
-                true,
-                setInputValue(''),
-                setImagem(opcoesImg[numeroSecreto]),
-                setTexto('Você acertou a resposta é ' + opcoes[numeroSecreto]),
-                onClickAction(),
-                setPontos(pontos + 1);
-
+        if (inputValue.toLowerCase() === opcoes[numeroSecreto].toLowerCase()) {
+            setInputValue('');
+            setImagem(listaImagens[numeroSecreto]);
+            setTexto('Você acertou a resposta é ' + opcoes[numeroSecreto]);
+            onClickAction();
+            setPontos(pontos + 1);
+            return true;
         } else {
-            return console.log('Errado'),
-                false,
-                setInputValue(''),
-                setImagem(opcoesImg[numeroSecreto]),
-                setTexto('Tá precisando assistir mais animes, a resposta era ' + opcoes[numeroSecreto]),
-                onClickAction(),
-                setVidas(vidas - 1);
+
+            setInputValue('');
+            setImagem(listaImagens[numeroSecreto]);
+            setTexto('Tá precisando assistir mais animes, a resposta era ' + opcoes[numeroSecreto]);
+            onClickAction();
+            setVidas(vidas - 1);
+            return false;
         }
     }
     return (
@@ -97,7 +109,7 @@ export const BoxValidacao = ({ valor, onClickAction, numeroSecreto, setPontos, s
                 {!valor && <Botao onClick={ok} marginbottom="0px">Conferir Resposta!</Botao>}
             </BoxPontuacao>
             {!valor && <ImagensContainer src={Logo} />}
-            {valor && <ImagensContainer src={imagem} />}
+            {valor && <ImagensContainer src={imagem} alt={imagem}/>}
             {valor && <Textos> {texto} </Textos>}
             <Pergunta numeroSecreto={numeroSecreto} />
         </BoxValidacaoContainer>

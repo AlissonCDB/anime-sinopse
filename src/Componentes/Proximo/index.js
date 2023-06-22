@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Botao } from "../Botao";
+import { Botao } from "../ObjetosReutilizaveis/Botao";
 
 const ProximoContainer = styled.div`
     display: flex;
@@ -7,7 +7,7 @@ const ProximoContainer = styled.div`
     justify-content: center;
     height: auto;
 `
-export const Proximo = ({valor, alterarNumero, onClickAction}) => {
+export const Proximo = ({ valor, alterarNumero, onClickAction }) => {
 
     const executar = () => {
         return alterarNumero(), onClickAction();
