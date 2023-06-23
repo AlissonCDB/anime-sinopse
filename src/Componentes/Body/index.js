@@ -14,8 +14,8 @@ export const Body = ({ setResultadoMostrar, setResultadoPerfeito, setResultadoCe
     const [valor, setValor] = useState(false);
     const [numeroSecreto, setNumeroSecreto] = useState(GeradorDeNumero);
     const [numerosSelecionados, setNumerosSelecionados] = useState([GeradorDeNumero,]);
-    var [vidas, setVidas] = useState(3);
-    var [pontos, setPontos] = useState(0);
+    let [vidas, setVidas] = useState(3);
+    let [pontos, setPontos] = useState(0);
 
     //Função que gera um novo numero aleatorio
     const alterarNumero = async () => {
@@ -79,7 +79,7 @@ export const Body = ({ setResultadoMostrar, setResultadoPerfeito, setResultadoCe
                 numeroSecreto={numeroSecreto}
                 alterarNumero={alterarNumero}
                 valor={valor}
-                onClickAction={onClickAction}
+                onClickAction={onClickAction}     
             />
         </BodyContainer>
     )

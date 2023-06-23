@@ -45,7 +45,7 @@ export const Header = ({ mostrar }) => {
                 Acerte o anime apenas pela Sinopse
             </Titulo>
             {!mostrar && <Textos>
-                Tente adivinhar qual anime é apenas pela sinopse, que tera palavras chaver ocultadas, sera que você realmente conhece os animes?
+                Tente adivinhar o anime apenas pela sinopse, que terá suas palavras-chave ocultadas.
                 <br />
                 Atualmente tem {numeroDeAnimesAtuais} animes, tente acertar o maximo que conseguir até perder as 3 vidas!
             </Textos>}
